@@ -1,0 +1,49 @@
+name: raventrade
+description: Trade App For RavenPay Crypto Market Trading.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  flutter_screenutil: ^5.5.3+2
+  nb_utils: ^6.1.2
+  cupertino_icons: ^1.0.2
+  candlesticks: ^2.1.0
+  flutter_svg: ^2.0.9
+  dio: ^5.4.0
+  flutter_riverpod: ^2.4.9
+  freezed_annotation: ^2.4.1
+  web_socket_channel: ^2.4.0
+  intl: ^0.19.0
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.7
+  freezed: ^2.4.5
+  flutter_launcher_icons: "^0.13.1"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/svgs/
+    - assets/icons/
+    - assets/images/
+ 
+  fonts:
+    - family: Satoshi
+      fonts:
+        - asset: assets/fonts/Satoshi-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Satoshi-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Satoshi-Bold.ttf
+          weight: 600
+  
