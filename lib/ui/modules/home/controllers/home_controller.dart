@@ -40,6 +40,9 @@ class HomeController extends GetxController with GlobalController {
     super.onInit();
   }
 
+  // ENTRY POINT
+  // Get the symbols, then get the candles and if they are not available,
+  //then initialize websocket and get needed data
   void init() {
     getSymbols().then((value) {
       if (currentSymbol.value != null) {
@@ -59,6 +62,7 @@ class HomeController extends GetxController with GlobalController {
     });
   }
 
+  // GET SYMBOLS
   Future<void> getSymbols() async {
     debugPrint("Getting Symbols.....");
     _logger.d("Getting Symbols.....");
@@ -88,6 +92,7 @@ class HomeController extends GetxController with GlobalController {
     }
   }
 
+  // GET THE CANDLES
   Future<void> getCandles(SymbolResponseModel symbol, String interval) async {
     _logger.d("Getting Candles......");
     try {
@@ -112,6 +117,7 @@ class HomeController extends GetxController with GlobalController {
     }
   }
 
+  // INITIALIZE THE WEBSOCKET
   void initializeWebSocket({
     required String symbol,
     required String interval,
@@ -146,6 +152,7 @@ class HomeController extends GetxController with GlobalController {
     }
   }
 
+  // TO LOAD MORE CANDLES
   Future<void> loadMoreCandles(StreamValueDTO streamValue) async {
     try {
       final data = await binanceRepository.getCandles(
@@ -163,6 +170,7 @@ class HomeController extends GetxController with GlobalController {
     }
   }
 
+  // RE_INITIALIZE FROM HOMEPAGE
   void reInitialize(String value) {
     currentInterval.value = value;
     if (currentSymbol.value != null) {

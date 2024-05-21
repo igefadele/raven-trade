@@ -2,7 +2,19 @@
 
 Trade App For RavenPay Crypto Market Trading.
 
+### NOTE: 
+- If you are running this project (my app code here) from a country Binance is currently restricted then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
 
+
+## Tools, Packages
+- GetX is used for state management, route management and dependency injection
+- nb_utils is used for some UI utilities and extensions.
+- ScreenUtils is adopted for dynamic sizing of UI elements.
+- Dio is used for network calls.
+- Binance Websocket API is the data source used in the app. 
+
+## Credits
+- The UI Figma design for this project is supplied by the RavenPay team (Don't forget to give them a shout-out if you use this repo for your next project)
 
 
 ## Video Demo
