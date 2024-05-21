@@ -3,7 +3,7 @@
 Trade App For RavenPay Crypto Market Trading.
 
 ### NOTE: 
-- If you are running this project (my app code here) from a country Binance is currently restricted then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
+- If you are running this project (this codebase) from a country where Binance is currently restricted in, then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
 
 
 ## Tools, Packages
