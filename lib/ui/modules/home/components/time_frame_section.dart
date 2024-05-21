@@ -1,20 +1,26 @@
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:raventrade/constants/app_assets.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
+import 'package:raventrade/core/values/strings/text_constants.dart';
 import 'package:raventrade/ui/global/extensions/context_extension.dart';
 import 'package:raventrade/ui/modules/home/controllers/home_controller.dart';
 import 'package:raventrade/ui/global/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class TimeFrameSection extends StatelessWidget {
-  TimeFrameSection({
+class TimeFrameSection extends StatefulWidget {
+  final Function(String) onSelected;
+
+  const TimeFrameSection({
     required this.onSelected,
     super.key,
   });
 
-  final Function(String) onSelected;
+  @override
+  State<TimeFrameSection> createState() => _TimeFrameSectionState();
+}
 
+class _TimeFrameSectionState extends State<TimeFrameSection> {
   final List<String> timeframes = [
     '1H',
     '2H',
@@ -25,6 +31,22 @@ class TimeFrameSection extends StatelessWidget {
   ];
 
   final controller = Get.find<HomeController>();
+  String interval = "1H";
+
+  @override
+  void initState() {
+    super.initState();
+    interval = controller.currentInterval.value;
+    controller.reInitialize(controller.currentInterval.value);
+  }
+
+  setInterval(String value) {
+    setState(() {
+      controller.currentInterval.value = value;
+      interval = value;
+      controller.reInitialize(value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +57,7 @@ class TimeFrameSection extends StatelessWidget {
         child: Row(
           children: [
             AppText.body1(
-              'Time',
+              TIME,
               color:
                   context.isDarkMode ? AppColors.white : AppColors.blackTint2,
             ),
@@ -43,8 +65,8 @@ class TimeFrameSection extends StatelessWidget {
             ...timeframes.map(
               (e) => InkWell(
                 onTap: () {
-                  onSelected.call(e);
-                  controller.currentInterval.value = e;
+                  widget.onSelected.call(e);
+                  setInterval(e);
                 },
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 400),
@@ -57,7 +79,8 @@ class TimeFrameSection extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: controller.currentInterval.value == e
+                    //color: controller.currentInterval.value == e
+                    color: interval == e
                         ? context.isDarkMode
                             ? const Color(0xff555C63)
                             : const Color(0xffCFD3D8)
@@ -93,12 +116,6 @@ class TimeFrameSection extends StatelessWidget {
                   const Gap(5),
                   SvgPicture.asset(
                     AppAssets.charts,
-                    // colorFilter: ColorFilter.mode(
-                    //   context.isDarkMode
-                    //       ? AppColors.white
-                    //       : AppColors.blackTint2,
-                    //   BlendMode.colorBurn,
-                    // ),
                   )
                 ],
               ),

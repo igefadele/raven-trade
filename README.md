@@ -33,3 +33,19 @@ Trade App For RavenPay Crypto Market Trading.
 ![Screenshot 8](screenshots/image08.jpg)
 ![Screenshot 9](screenshots/image09.jpg)
  -->
+
+
+## Need Help?
+
+With a decade of experience building solution-focused digital products (Software, Mobile Apps, Web Apps, Desktop Apps, etc.), my experience and skillset will be priceless for the success of your institution's prjects.
+
+### How I can contribute:
+- Provide your team with highly useful technical guidelines, best practices and many more for a productive product development experience.
+- With experience across both technical and business corridors, I could provide your team and organisation with insights, guidance, etc. which will help you achieve your business bottomline quicker and cleaner.
+
+### Main Tech Stack
+- Flutter and Dart (With Kotlin, Swift): Android App, iOS App, PWA (Progressive Web Apps), Web App, MacOS Desktop App, Windows Desktop, Linux Desktop.
+- NestJS + NodeJS + TypeScript : API (REST, GraphQL, WebSocket), Micro-Services, etc.
+- NextJS + NodeJS + TypeScript : Websites and Web Apps, SSR, And many more.
+- Different DBs & Platforms: SQL, NoSQL, BaaS, PaaS 
+- And Some Others: 

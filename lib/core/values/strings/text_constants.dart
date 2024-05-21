@@ -7,3 +7,5 @@ const String SELL = "Sell";
 
 const String KLINE = "kline";
 const String DEPTH_UPDATE = "depthUpdate";
+
+const String TIME = "Time";

@@ -21,7 +21,8 @@ class HomeController extends GetxController with GlobalController {
 
   RxList<Candle> candles = <Candle>[].obs;
   RxString currentInterval = "1H".obs;
-  Rxn<SymbolResponseModel> currentSymbol = Rxn<SymbolResponseModel>();
+  Rx<SymbolResponseModel> currentSymbol =
+      SymbolResponseModel(symbol: 'BTCUSDT', price: '').obs;
   RxInt currentTabIndex = 0.obs;
   RxInt bottomTabIndex = 0.obs;
   Rx<ModuleState> moduleState = (ModuleState.idle).obs;
@@ -35,7 +36,7 @@ class HomeController extends GetxController with GlobalController {
 
   @override
   onInit() {
-    debugPrint('==== \n\nHOME CONTROLLER CALLED!\n\n ====');
+    _logger.d('==== \n\nHOME CONTROLLER CALLED!\n\n ====');
     init();
     super.onInit();
   }
@@ -44,32 +45,23 @@ class HomeController extends GetxController with GlobalController {
   // Get the symbols, then get the candles and if they are not available,
   //then initialize websocket and get needed data
   void init() {
-    getSymbols().then((value) {
-      if (currentSymbol.value != null) {
-        debugPrint(
-            '\n\ncurrentSymbol: ${currentSymbol.value!.toJson()} \n\n\n');
-        getCandles(currentSymbol.value!, currentInterval.value).then((value) {
-          if (candleTicker.value == null) {
-            initializeWebSocket(
-              interval: currentInterval.value,
-              symbol: currentSymbol.value!.symbol,
-            );
-          }
-        });
-      } else {
-        debugPrint('\n\ncurrentSymbol is Null \n\n\n');
+    getSymbols();
+    getCandles(currentSymbol.value, currentInterval.value).then((value) {
+      if (candleTicker.value == null) {
+        initializeWebSocket(
+          interval: currentInterval.value,
+          symbol: currentSymbol.value.symbol,
+        );
       }
     });
   }
 
   // GET SYMBOLS
   Future<void> getSymbols() async {
-    debugPrint("Getting Symbols.....");
     _logger.d("Getting Symbols.....");
     try {
       moduleState.value = ModuleState.busy;
       final result = await binanceRepository.getSymbols();
-      debugPrint('\n\result symbol: ${result[0].toJson()} \n\n\n');
       symbols.value = result;
       _logger.d("Symbols Length ===> ${symbols.length}");
       if (symbols.isNotEmpty) {
@@ -81,19 +73,18 @@ class HomeController extends GetxController with GlobalController {
       moduleState.value = ModuleState.error;
       moduleError.value = e;
       _logger.e(e.message);
-      debugPrint('\n\result symbol: ${e.message} \n\n\n');
     } catch (e) {
       _logger.e(e.toString());
       final err =
           AppError("unknown error", "an error occurred, please try again.");
       moduleState.value = ModuleState.error;
       moduleError.value = err;
-      debugPrint('\n\result symbol: ${e.toString()} \n\n\n');
     }
   }
 
   // GET THE CANDLES
-  Future<void> getCandles(SymbolResponseModel symbol, String interval) async {
+  Future<List<Candle>> getCandles(
+      SymbolResponseModel symbol, String interval) async {
     _logger.d("Getting Candles......");
     try {
       moduleState.value = ModuleState.busy;
@@ -104,21 +95,24 @@ class HomeController extends GetxController with GlobalController {
       candles.value = result;
       _logger.d("Candles Length :: ${candles.length}");
       moduleState.value = ModuleState.idle;
+      return result;
     } on Failure catch (e) {
       moduleState.value = ModuleState.error;
       moduleError.value = e;
       _logger.e(e.message);
+      return candles;
     } catch (e) {
       _logger.e(e.toString());
       final err =
           AppError("unknown error", "an error occurred, please try again.");
       moduleState.value = ModuleState.error;
       moduleError.value = err;
+      return candles;
     }
   }
 
   // INITIALIZE THE WEBSOCKET
-  void initializeWebSocket({
+  Future<void> initializeWebSocket({
     required String symbol,
     required String interval,
   }) async {
@@ -171,14 +165,15 @@ class HomeController extends GetxController with GlobalController {
   }
 
   // RE_INITIALIZE FROM HOMEPAGE
-  void reInitialize(String value) {
+  Future<void> reInitialize(String value) async {
+    debugPrint('CALLED REFRESH');
     currentInterval.value = value;
-    if (currentSymbol.value != null) {
-      getCandles(currentSymbol.value!, currentInterval.value).then((value) {
+    if (currentSymbol.value.symbol != '') {
+      getCandles(currentSymbol.value, currentInterval.value).then((value) {
         if (candleTicker.value == null) {
           initializeWebSocket(
             interval: currentInterval.value,
-            symbol: currentSymbol.value!.symbol,
+            symbol: currentSymbol.value.symbol,
           );
         }
       });

@@ -7,6 +7,7 @@ import 'package:raventrade/core/utils/app_logger.dart';
 import 'package:raventrade/core/values/strings/constants.dart';
 import 'package:raventrade/core/values/styles/app_theme.dart';
 import 'package:raventrade/ui/global/global_binding.dart';
+import 'package:raventrade/ui/modules/home/controllers/home_controller.dart';
 import 'package:raventrade/ui/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,8 +30,19 @@ void main() async {
   );
 }
 
-class RavenTradeApp extends StatelessWidget {
+class RavenTradeApp extends StatefulWidget {
   const RavenTradeApp({super.key});
+
+  @override
+  State<RavenTradeApp> createState() => _RavenTradeAppState();
+}
+
+class _RavenTradeAppState extends State<RavenTradeApp> {
+  @override
+  void initState() {
+    super.initState();
+    Get.put(HomeController());
+  }
 
   @override
   Widget build(BuildContext context) {

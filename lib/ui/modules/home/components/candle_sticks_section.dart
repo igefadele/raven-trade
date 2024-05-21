@@ -11,16 +11,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CandleSticksSection extends StatefulWidget {
-  const CandleSticksSection({super.key});
+  final String currentInterval;
+
+  const CandleSticksSection({
+    Key? key,
+    required this.currentInterval,
+  }) : super(key: key);
+
   @override
   State<CandleSticksSection> createState() => _CandleSticksSectionState();
 }
 
 class _CandleSticksSectionState extends State<CandleSticksSection> {
+  GlobalKey<_CandleSticksSectionState> candleStickKey = GlobalKey();
+
   final controller = Get.find<HomeController>();
   CandleTickerModel? get candleTicker => controller.candleTicker.value;
   SymbolResponseModel? get currentSymbol => controller.currentSymbol.value;
-  String get currentInterval => controller.currentInterval.value;
+  //String get currentInterval => controller.currentInterval.value;
   List<Candle> get candles => controller.candles;
 
   @override
@@ -47,17 +55,17 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
             height: 400,
             width: double.infinity,
             child: Candlesticks(
-              key: Key(currentSymbol!.symbol + currentInterval),
-              candles: candles,
+              //key: Key(currentSymbol!.symbol + currentInterval),
+              key: candleStickKey,
+              candles: controller.candles,
               onLoadMoreCandles: () {
                 return controller.loadMoreCandles(
                   StreamValueDTO(
                     symbol: currentSymbol!,
-                    interval: currentInterval.toLowerCase(),
+                    interval: widget.currentInterval.toLowerCase(),
                   ),
                 );
               },
-              // displayZoomActions: false,
               actions: [
                 ToolBarAction(
                   // width: 40,

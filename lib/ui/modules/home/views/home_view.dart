@@ -1,6 +1,7 @@
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:raventrade/constants/constants.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
+import 'package:raventrade/core/values/strings/constants.dart';
 import 'package:raventrade/core/values/styles/text_styles.dart';
 import 'package:raventrade/ui/global/extensions/context_extension.dart';
 import 'package:raventrade/ui/modules/home/components/components.dart';
@@ -34,7 +35,7 @@ class _HomeViewState extends State<HomeView>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    //controller.init();
+    controller.init();
   }
 
   @override
@@ -73,7 +74,6 @@ class _HomeViewState extends State<HomeView>
                           height: 45,
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
-                            // color: Colors.blue,
                             border: Border.all(
                               color: AppColors.blackTint,
                             ),
@@ -125,7 +125,6 @@ class _HomeViewState extends State<HomeView>
             ),
           ),
           child: AppBar(
-            // backgroundColor: Colors.transparent,
             centerTitle: false,
             automaticallyImplyLeading: false,
             title: SvgPicture.asset(
@@ -158,97 +157,103 @@ class _HomeViewState extends State<HomeView>
           ),
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Gap.h8,
-              PriceChangeSection(),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  border: Border.all(
-                    color: Theme.of(context).shadowColor,
-                    width: 1.5,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 42,
-                      margin: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).shadowColor,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Theme.of(context).shadowColor,
-                          width: 1.5,
-                        ),
-                      ),
-                      child: TabBar(
-                        controller: _tabController,
-                        padding: const EdgeInsets.all(2),
-                        labelStyle: const TextStyle(
-                          fontFamily: 'Satoshi',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
-                        ),
-                        tabs: [
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: AppText.body2('Charts'),
-                          ),
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: AppText.body2('Orderbook'),
-                          ),
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: AppText.body2('Recent trades'),
-                          ),
-                        ],
-                      ),
+      body: RefreshIndicator(
+        onRefresh: () =>
+            controller.reInitialize(controller.currentInterval.value),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Gap.h8,
+                PriceChangeSection(),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    border: Border.all(
+                      color: Theme.of(context).shadowColor,
+                      width: 1.5,
                     ),
-                    SizedBox(
-                      height: 550,
-                      child: TabBarView(
-                        controller: _tabController,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          const CandleSticksSection(),
-                          OrderBookSection(),
-                          Container(
-                            height: 30,
-                            padding: const EdgeInsets.all(20),
-                            child: AppText.heading5(
-                              'Recent Trades',
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 42,
+                        margin: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).shadowColor,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: Theme.of(context).shadowColor,
+                            width: 1.5,
+                          ),
+                        ),
+                        child: TabBar(
+                          controller: _tabController,
+                          padding: const EdgeInsets.all(2),
+                          labelStyle: const TextStyle(
+                            fontFamily: SATOSHI,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                          ),
+                          tabs: [
+                            DecoratedBox(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: AppText.body2('Charts'),
                             ),
-                          )
-                        ],
+                            DecoratedBox(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: AppText.body2('Orderbook'),
+                            ),
+                            DecoratedBox(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: AppText.body2('Recent trades'),
+                            ),
+                          ],
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Gap.h30,
-              Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  border: Border.all(
-                    color: Theme.of(context).shadowColor,
-                    width: 1.5,
+                      SizedBox(
+                        height: 550,
+                        child: TabBarView(
+                          controller: _tabController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: [
+                            CandleSticksSection(
+                              currentInterval: controller.currentInterval.value,
+                            ),
+                            OrderBookSection(),
+                            Container(
+                              height: 30,
+                              padding: const EdgeInsets.all(20),
+                              child: AppText.heading5(
+                                'Recent Trades',
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                child: const TradesSection(),
-              ),
-            ],
+                Gap.h30,
+                Container(
+                  height: 300,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    border: Border.all(
+                      color: Theme.of(context).shadowColor,
+                      width: 1.5,
+                    ),
+                  ),
+                  child: const TradesSection(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
