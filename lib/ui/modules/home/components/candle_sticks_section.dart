@@ -72,7 +72,7 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                       },
                       actions: [
                         ToolBarAction(
-                          // width: 40,
+                          width: 20,
                           onPressed: () {},
                           child: Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -84,13 +84,13 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                           ),
                         ),
                         ToolBarAction(
-                          width: 60,
+                          width: 50,
                           onPressed: () {},
                           child: Padding(
                             padding: const EdgeInsets.only(left: 2),
                             child: AppText.caption(
                               currentSymbol!.symbol,
-                              fontSize: 11,
+                              fontSize: 10,
                               color: AppColors.blackTint2,
                             ),
                           ),
@@ -105,13 +105,13 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                                 children: [
                                   AppText.body2(
                                     'O ',
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.open.formatValue() ??
                                         "-",
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.green,
                                   ),
                                 ],
@@ -128,13 +128,13 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                                 children: [
                                   AppText.body2(
                                     'H ',
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.high.formatValue() ??
                                         "-",
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.green,
                                   ),
                                 ],
@@ -151,13 +151,13 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                                 children: [
                                   AppText.body2(
                                     'L ',
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.low.formatValue() ??
                                         "-",
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.green,
                                   ),
                                 ],
@@ -174,13 +174,13 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                                 children: [
                                   AppText.body2(
                                     'C ',
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.close.formatValue() ??
                                         "-",
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: AppColors.green,
                                   ),
                                 ],
