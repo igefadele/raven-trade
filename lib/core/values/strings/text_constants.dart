@@ -2,3 +2,8 @@
 
 const String MAIN = "main";
 const String SATOSHI = "Satoshi";
+const String BUY = "Buy";
+const String SELL = "Sell";
+
+const String KLINE = "kline";
+const String DEPTH_UPDATE = "depthUpdate";

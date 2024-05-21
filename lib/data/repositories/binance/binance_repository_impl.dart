@@ -6,16 +6,26 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class BinanceRepositoryImpl with GlobalController implements BinanceRepository {
   @override
-  WebSocketChannel establishSocketConnection(
-      {required String symbol, required String interval}) {
+  WebSocketChannel establishSocketConnection({
+    required String symbol,
+    required String interval,
+  }) {
     return binanceProvider.establishSocketConnection(
-        symbol: symbol, interval: interval);
+      symbol: symbol,
+      interval: interval,
+    );
   }
 
   @override
-  Future<List<Candle>> getCandles(
-      {required String symbol, required String interval, int? endTime}) async {
-    return binanceProvider.getCandles(symbol: symbol, interval: interval);
+  Future<List<Candle>> getCandles({
+    required String symbol,
+    required String interval,
+    int? endTime,
+  }) async {
+    return binanceProvider.getCandles(
+      symbol: symbol,
+      interval: interval,
+    );
   }
 
   @override

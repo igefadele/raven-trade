@@ -2,7 +2,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
+import 'package:raventrade/core/values/strings/constants.dart';
 import 'widgets.dart';
 
 enum TradeType {
@@ -27,7 +29,7 @@ class TradeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 171,
+      width: 171.spMin,
       height: 32,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -40,7 +42,7 @@ class TradeButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: AppText.button(
-          type.isBuy ? "Buy" : "Sell",
+          type.isBuy ? BUY : SELL,
           color: Colors.white,
         ),
       ),

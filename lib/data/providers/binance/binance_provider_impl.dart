@@ -9,9 +9,12 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class BinanceProviderImpl with GlobalController implements BinanceProvider {
   final _logger = appLogger(BinanceProviderImpl);
+
   @override
-  WebSocketChannel establishSocketConnection(
-      {required String symbol, required String interval}) {
+  WebSocketChannel establishSocketConnection({
+    required String symbol,
+    required String interval,
+  }) {
     final channel = WebSocketChannel.connect(
       Uri.parse('wss://stream.binance.com:9443/ws'),
     );
@@ -40,8 +43,11 @@ class BinanceProviderImpl with GlobalController implements BinanceProvider {
   }
 
   @override
-  Future<List<Candle>> getCandles(
-      {required String symbol, required String interval, int? endTime}) async {
+  Future<List<Candle>> getCandles({
+    required String symbol,
+    required String interval,
+    int? endTime,
+  }) async {
     final String uri =
         "https://api.binance.com/api/v3/klines?symbol=$symbol&interval=$interval${endTime != null ? "&endTime=$endTime" : ""}";
     final data = await networkClient.get(uri) as List;

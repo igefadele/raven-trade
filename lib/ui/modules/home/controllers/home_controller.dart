@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:raventrade/core/utils/app_logger.dart';
+import 'package:raventrade/core/values/strings/constants.dart';
 import 'package:raventrade/data/enums/base_enums.dart';
 import 'package:raventrade/data/models/errors/errors.dart';
 import 'package:raventrade/data/models/models.dart';
@@ -34,8 +35,11 @@ class HomeController extends GetxController with GlobalController {
 
   @override
   onInit() {
+    debugPrint('==== HOME CONTROLLER CALLED! ====');
     getSymbols().then((value) {
       if (currentSymbol.value != null) {
+        debugPrint(
+            '\n\ncurrentSymbol: ${currentSymbol.value!.toJson()} \n\n\n');
         getCandles(currentSymbol.value!, currentInterval.value).then((value) {
           if (candleTicker.value == null) {
             initializeWebSocket(
@@ -44,6 +48,8 @@ class HomeController extends GetxController with GlobalController {
             );
           }
         });
+      } else {
+        debugPrint('\n\ncurrentSymbol is Null \n\n\n');
       }
     });
 
@@ -98,8 +104,10 @@ class HomeController extends GetxController with GlobalController {
     }
   }
 
-  void initializeWebSocket(
-      {required String symbol, required String interval}) async {
+  void initializeWebSocket({
+    required String symbol,
+    required String interval,
+  }) async {
     _logger.d("Initializing websocket..");
 
     final chn = binanceRepository.establishSocketConnection(
@@ -111,7 +119,7 @@ class HomeController extends GetxController with GlobalController {
       final map = jsonDecode(value) as Map<String, dynamic>;
       final eventType = map['e'];
 
-      if (eventType == 'kline') {
+      if (eventType == KLINE) {
         final candleTickerInfo = CandleTickerModel.fromJson(map);
         candleTicker.value = candleTickerInfo;
         if (candles.isNotEmpty &&
@@ -123,7 +131,7 @@ class HomeController extends GetxController with GlobalController {
                 candles[0].date.difference(candles[1].date)) {
           candles.insert(0, candleTicker.value!.candle);
         }
-      } else if (eventType == 'depthUpdate') {
+      } else if (eventType == DEPTH_UPDATE) {
         final orderBookInfo = OrderBook.fromMap(map);
         orderBooks.value = orderBookInfo;
       }
