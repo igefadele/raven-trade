@@ -11,8 +11,8 @@ You can easily build on this to create a full-fledged Crypto Trading App, as I'v
 - Modules, Repositories, Providers, Utils, Values, Themes, etc: All Structure Set.
 - And many more...
 
-### NOTE: 
-- If you are running this project (this codebase) from a country where Binance is currently restricted in, then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
+### Note: 
+- If you are running this project (this codebase) from a country where Binance is currently restricted, then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
 
 
 ## Tools, Packages
