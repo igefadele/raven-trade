@@ -34,6 +34,11 @@ class HomeController extends GetxController with GlobalController {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
+  RxBool candleLoading = false.obs;
+  RxBool symbolLoading = false.obs;
+  RxBool websocketLoading = false.obs;
+  RxBool reInitializing = false.obs;
+
   @override
   onInit() {
     _logger.d('==== \n\nHOME CONTROLLER CALLED!\n\n ====');
@@ -59,6 +64,7 @@ class HomeController extends GetxController with GlobalController {
   // GET SYMBOLS
   Future<void> getSymbols() async {
     _logger.d("Getting Symbols.....");
+    symbolLoading.value = true;
     try {
       moduleState.value = ModuleState.busy;
       final result = await binanceRepository.getSymbols();
@@ -80,12 +86,14 @@ class HomeController extends GetxController with GlobalController {
       moduleState.value = ModuleState.error;
       moduleError.value = err;
     }
+    symbolLoading.value = false;
   }
 
   // GET THE CANDLES
   Future<List<Candle>> getCandles(
       SymbolResponseModel symbol, String interval) async {
     _logger.d("Getting Candles......");
+    candleLoading.value = true;
     try {
       moduleState.value = ModuleState.busy;
       final result = await binanceRepository.getCandles(
@@ -95,11 +103,13 @@ class HomeController extends GetxController with GlobalController {
       candles.value = result;
       _logger.d("Candles Length :: ${candles.length}");
       moduleState.value = ModuleState.idle;
+      candleLoading.value = false;
       return result;
     } on Failure catch (e) {
       moduleState.value = ModuleState.error;
       moduleError.value = e;
       _logger.e(e.message);
+      candleLoading.value = false;
       return candles;
     } catch (e) {
       _logger.e(e.toString());
@@ -107,6 +117,7 @@ class HomeController extends GetxController with GlobalController {
           AppError("unknown error", "an error occurred, please try again.");
       moduleState.value = ModuleState.error;
       moduleError.value = err;
+      candleLoading.value = false;
       return candles;
     }
   }
@@ -117,6 +128,7 @@ class HomeController extends GetxController with GlobalController {
     required String interval,
   }) async {
     _logger.d("Initializing websocket..");
+    websocketLoading.value = true;
 
     final chn = binanceRepository.establishSocketConnection(
       interval: interval.toLowerCase(),
@@ -144,6 +156,7 @@ class HomeController extends GetxController with GlobalController {
         orderBooks.value = orderBookInfo;
       }
     }
+    websocketLoading.value = false;
   }
 
   // TO LOAD MORE CANDLES
@@ -167,6 +180,7 @@ class HomeController extends GetxController with GlobalController {
   // RE_INITIALIZE FROM HOMEPAGE
   Future<void> reInitialize(String value) async {
     debugPrint('CALLED REFRESH');
+    reInitializing.value = true;
     currentInterval.value = value;
     if (currentSymbol.value.symbol != '') {
       getCandles(currentSymbol.value, currentInterval.value).then((value) {
@@ -178,5 +192,6 @@ class HomeController extends GetxController with GlobalController {
         }
       });
     }
+    reInitializing.value = false;
   }
 }
