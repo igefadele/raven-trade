@@ -1,6 +1,8 @@
 # RavenTrade
 
-Trade App For RavenPay Crypto Market Trading.
+Trade App For RavenPay Crypto Market Trading. 
+
+It's a functional app that you can use to monitor crypto pairs like BTCUSDT, etc. by following the candlestic charts and order books in realtime as retrieved from the Binance API.
 
 ### NOTE: 
 - If you are running this project (this codebase) from a country where Binance is currently restricted in, then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
@@ -37,10 +39,10 @@ Trade App For RavenPay Crypto Market Trading.
 
 ## Need Help?
 
-With a decade of experience building solution-focused digital products (Software, Mobile Apps, Web Apps, Desktop Apps, etc.), my experience and skillset will be priceless for the success of your institution's prjects.
+With a decade of experience building solution-focused digital products (Software, Mobile Apps, Web Apps, Desktop Apps, etc.), my experience and skillset will be priceless for the success of your organisation's projects/products.
 
 ### How I can contribute:
-- Provide your team with highly useful technical guidelines, best practices and many more for a productive product development experience.
+- Provide your team with highly useful technical guidelines, industry best practices and many more for a productive product development experience.
 - With experience across both technical and business corridors, I could provide your team and organisation with insights, guidance, etc. which will help you achieve your business bottomline quicker and cleaner.
 
 ### Main Tech Stack
