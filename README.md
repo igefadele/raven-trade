@@ -4,6 +4,13 @@ Trade App For RavenPay Crypto Market Trading.
 
 It's a functional app that you can use to monitor crypto pairs like BTCUSDT, etc. by following the candlestic charts and order books in realtime as retrieved from the Binance API.
 
+You can easily build on this to create a full-fledged Crypto Trading App, as I've taken my time to lay the foundation needed for an enterprise-grade crypto trading app in this project.
+
+- Routes Management: Set.
+- Dependency Injection: Set.
+- Modules, Repositories, Providers, Utils, Values, Themes, etc: All Structure Set.
+- And many more...
+
 ### NOTE: 
 - If you are running this project (this codebase) from a country where Binance is currently restricted in, then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
 
