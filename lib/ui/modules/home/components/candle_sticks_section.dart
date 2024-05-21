@@ -19,7 +19,7 @@ class CandleSticksSection extends StatefulWidget {
 class _CandleSticksSectionState extends State<CandleSticksSection> {
   final controller = Get.find<HomeController>();
   CandleTickerModel? get candleTicker => controller.candleTicker.value;
-  SymbolResponseModel get currentSymbol => controller.currentSymbol.value;
+  SymbolResponseModel? get currentSymbol => controller.currentSymbol.value;
   String get currentInterval => controller.currentInterval.value;
   List<Candle> get candles => controller.candles;
 
@@ -47,12 +47,12 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
             height: 400,
             width: double.infinity,
             child: Candlesticks(
-              key: Key(currentSymbol.symbol + currentInterval),
+              key: Key(currentSymbol!.symbol + currentInterval),
               candles: candles,
               onLoadMoreCandles: () {
                 return controller.loadMoreCandles(
                   StreamValueDTO(
-                    symbol: currentSymbol,
+                    symbol: currentSymbol!,
                     interval: currentInterval.toLowerCase(),
                   ),
                 );
@@ -77,7 +77,7 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 2),
                     child: AppText.caption(
-                      currentSymbol.symbol,
+                      currentSymbol!.symbol,
                       fontSize: 11,
                       color: AppColors.blackTint2,
                     ),

@@ -38,13 +38,13 @@ class PriceChangeSection extends StatelessWidget {
                   height: 24,
                 ),
                 const Gap(8),
-                if (controller.currentSymbol.value.symbol != '') ...[
+                if (controller.currentSymbol.value != null) ...[
                   InkWell(
                     onTap: () {},
                     child: Row(
                       children: [
                         AppText.heading5(
-                          controller.currentSymbol.value.symbol,
+                          controller.currentSymbol.value!.symbol,
                         ),
                         const Gap(10),
                         const Padding(
@@ -56,9 +56,9 @@ class PriceChangeSection extends StatelessWidget {
                   ),
                   const Gap(27),
                   AppText.heading5(
-                    controller.currentSymbol.value.symbol == ''
+                    controller.currentSymbol.value != null
                         ? ""
-                        : '\$${double.tryParse(controller.currentSymbol.value.price).formatValue()}',
+                        : '\$${double.tryParse(controller.currentSymbol.value!.price).formatValue()}',
                     color: AppColors.green,
                   ),
                 ] else ...[

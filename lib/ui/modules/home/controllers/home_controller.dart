@@ -20,8 +20,7 @@ class HomeController extends GetxController with GlobalController {
 
   RxList<Candle> candles = <Candle>[].obs;
   RxString currentInterval = "1H".obs;
-  Rx<SymbolResponseModel> currentSymbol =
-      SymbolResponseModel(symbol: '', price: '').obs;
+  Rxn<SymbolResponseModel> currentSymbol = Rxn<SymbolResponseModel>();
   RxInt currentTabIndex = 0.obs;
   RxInt bottomTabIndex = 0.obs;
   Rx<ModuleState> moduleState = (ModuleState.idle).obs;
@@ -36,12 +35,12 @@ class HomeController extends GetxController with GlobalController {
   @override
   onInit() {
     getSymbols().then((value) {
-      if (currentSymbol.value.symbol != "") {
-        getCandles(currentSymbol.value, currentInterval.value).then((value) {
+      if (currentSymbol.value != null) {
+        getCandles(currentSymbol.value!, currentInterval.value).then((value) {
           if (candleTicker.value == null) {
             initializeWebSocket(
               interval: currentInterval.value,
-              symbol: currentSymbol.value.symbol,
+              symbol: currentSymbol.value!.symbol,
             );
           }
         });
@@ -150,12 +149,12 @@ class HomeController extends GetxController with GlobalController {
 
   void reInitialize(String value) {
     currentInterval.value = value;
-    if (currentSymbol.value.symbol != '') {
-      getCandles(currentSymbol.value, currentInterval.value).then((value) {
+    if (currentSymbol.value != null) {
+      getCandles(currentSymbol.value!, currentInterval.value).then((value) {
         if (candleTicker.value == null) {
           initializeWebSocket(
             interval: currentInterval.value,
-            symbol: currentSymbol.value.symbol,
+            symbol: currentSymbol.value!.symbol,
           );
         }
       });
