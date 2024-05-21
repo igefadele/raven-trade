@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:raventrade/core/utils/app_logger.dart';
 import 'package:raventrade/data/models/models.dart';
 import 'package:raventrade/data/providers/binance/binance_provider.dart';

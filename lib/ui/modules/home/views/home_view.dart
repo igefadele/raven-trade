@@ -32,8 +32,9 @@ class _HomeViewState extends State<HomeView>
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
     super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    //controller.init();
   }
 
   @override

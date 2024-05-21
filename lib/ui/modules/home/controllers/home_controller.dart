@@ -35,7 +35,12 @@ class HomeController extends GetxController with GlobalController {
 
   @override
   onInit() {
-    debugPrint('==== HOME CONTROLLER CALLED! ====');
+    debugPrint('==== \n\nHOME CONTROLLER CALLED!\n\n ====');
+    init();
+    super.onInit();
+  }
+
+  void init() {
     getSymbols().then((value) {
       if (currentSymbol.value != null) {
         debugPrint(
@@ -52,18 +57,19 @@ class HomeController extends GetxController with GlobalController {
         debugPrint('\n\ncurrentSymbol is Null \n\n\n');
       }
     });
-
-    super.onInit();
   }
 
   Future<void> getSymbols() async {
+    debugPrint("Getting Symbols.....");
     _logger.d("Getting Symbols.....");
     try {
       moduleState.value = ModuleState.busy;
       final result = await binanceRepository.getSymbols();
+      debugPrint('\n\result symbol: ${result[0].toJson()} \n\n\n');
       symbols.value = result;
       _logger.d("Symbols Length ===> ${symbols.length}");
       if (symbols.isNotEmpty) {
+        debugPrint('\n\result symbol: ${result[11].toJson()} \n\n\n');
         currentSymbol.value = symbols[11];
       }
       moduleState.value = ModuleState.idle;
@@ -71,12 +77,14 @@ class HomeController extends GetxController with GlobalController {
       moduleState.value = ModuleState.error;
       moduleError.value = e;
       _logger.e(e.message);
+      debugPrint('\n\result symbol: ${e.message} \n\n\n');
     } catch (e) {
       _logger.e(e.toString());
       final err =
           AppError("unknown error", "an error occurred, please try again.");
       moduleState.value = ModuleState.error;
       moduleError.value = err;
+      debugPrint('\n\result symbol: ${e.toString()} \n\n\n');
     }
   }
 
