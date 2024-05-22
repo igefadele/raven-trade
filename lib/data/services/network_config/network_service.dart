@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'network_interceptors.dart';
 
 String get _baseUrl {
-  return "https://routex-demo.onrender.com";
+  return "";
 }
 
 Dio _createDio() {

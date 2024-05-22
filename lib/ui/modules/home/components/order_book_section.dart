@@ -1,5 +1,5 @@
 import 'package:get/get.dart' hide ContextExtensionss;
-import 'package:raventrade/constants/constants.dart';
+import 'package:raventrade/core/values/strings/app_assets.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
 import 'package:raventrade/core/values/styles/sizing_config.dart';
 import 'package:raventrade/data/models/models.dart';
@@ -19,7 +19,6 @@ class OrderBookSection extends StatelessWidget {
     return Obx(
       () => Column(
         children: [
-          //* SELECT SECTION
           Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: SizingConfig.defaultPadding),
