@@ -1,5 +1,5 @@
 import 'package:get/get.dart' hide ContextExtensionss;
-import 'package:raventrade/constants/app_assets.dart';
+import 'package:raventrade/core/values/strings/app_assets.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
 import 'package:raventrade/core/values/strings/text_constants.dart';
 import 'package:raventrade/ui/global/extensions/context_extension.dart';

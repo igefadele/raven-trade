@@ -1,4 +1,5 @@
 import 'package:get/get.dart' hide ContextExtensionss;
+import 'package:nb_utils/nb_utils.dart';
 import 'package:raventrade/core/values/strings/app_assets.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
 import 'package:raventrade/core/values/strings/constants.dart';
@@ -59,7 +60,7 @@ class _HomeViewState extends State<HomeView>
               right: 10,
               child: Container(
                 //height: context.isDarkMode ? 208 : 256,
-                height: 305,
+                height: 320,
                 width: 214,
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
@@ -108,13 +109,29 @@ class _HomeViewState extends State<HomeView>
                         child: AppText.body1(e),
                       ),
                     ),
-                    Switch(
-                      value:
-                          themeController.currentTheme.value == ThemeMode.dark,
-                      onChanged: (value) {
-                        themeController.switchTheme();
-                        Get.changeThemeMode(themeController.currentTheme.value);
-                      },
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        top: 13,
+                        bottom: 13,
+                      ),
+                      child: Row(
+                        children: [
+                          Switch(
+                            value: themeController.currentTheme.value ==
+                                ThemeMode.dark,
+                            onChanged: (value) {
+                              themeController.switchTheme();
+                              Get.changeThemeMode(
+                                  themeController.currentTheme.value);
+                            },
+                          ),
+                          10.width,
+                          AppText.body1(
+                            'Theme Mode',
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -168,112 +185,110 @@ class _HomeViewState extends State<HomeView>
             ),
           ),
         ),
-        body: controller.reInitializing.value
-            ? CircularProgressWidget(valueColor: AppColors.green)
-            : RefreshIndicator(
-                onRefresh: () =>
-                    controller.reInitialize(controller.currentInterval.value),
-                child: SafeArea(
-                  child: SingleChildScrollView(
+        body: RefreshIndicator(
+          onRefresh: () =>
+              controller.reInitialize(controller.currentInterval.value),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Gap.h8,
+                  PriceChangeSection(),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      border: Border.all(
+                        color: Theme.of(context).shadowColor,
+                        width: 1.5,
+                      ),
+                    ),
                     child: Column(
                       children: [
-                        Gap.h8,
-                        PriceChangeSection(),
-                        DecoratedBox(
+                        Container(
+                          height: 42,
+                          margin: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
+                            color: Theme.of(context).shadowColor,
+                            borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: Theme.of(context).shadowColor,
                               width: 1.5,
                             ),
                           ),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 42,
-                                margin: const EdgeInsets.all(15),
+                          child: TabBar(
+                            controller: _tabController,
+                            padding: const EdgeInsets.all(2),
+                            labelStyle: const TextStyle(
+                              fontFamily: SATOSHI,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                            ),
+                            tabs: [
+                              DecoratedBox(
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).shadowColor,
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Theme.of(context).shadowColor,
-                                    width: 1.5,
-                                  ),
                                 ),
-                                child: TabBar(
-                                  controller: _tabController,
-                                  padding: const EdgeInsets.all(2),
-                                  labelStyle: const TextStyle(
-                                    fontFamily: SATOSHI,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
-                                  ),
-                                  tabs: [
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: AppText.body2('Charts'),
-                                    ),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: AppText.body2('Orderbook'),
-                                    ),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: AppText.body2('Recent trades'),
-                                    ),
-                                  ],
-                                ),
+                                child: AppText.body2('Charts'),
                               ),
-                              SizedBox(
-                                height: 550,
-                                child: TabBarView(
-                                  controller: _tabController,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  children: [
-                                    CandleSticksSection(
-                                      currentInterval:
-                                          controller.currentInterval.value,
-                                    ),
-                                    controller.candleLoading.value
-                                        ? CircularProgressWidget(
-                                            valueColor: AppColors.green)
-                                        : OrderBookSection(),
-                                    Container(
-                                      height: 30,
-                                      padding: const EdgeInsets.all(20),
-                                      child: AppText.heading5(
-                                        'Recent Trades',
-                                      ),
-                                    )
-                                  ],
+                              DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: AppText.body2('Orderbook'),
+                              ),
+                              DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: AppText.body2('Recent trades'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 550,
+                          child: TabBarView(
+                            controller: _tabController,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              CandleSticksSection(
+                                currentInterval:
+                                    controller.currentInterval.value,
+                              ),
+                              controller.candleLoading.value
+                                  ? CircularProgressWidget(
+                                      valueColor: AppColors.green)
+                                  : OrderBookSection(),
+                              Container(
+                                height: 30,
+                                padding: const EdgeInsets.all(20),
+                                child: AppText.heading5(
+                                  'Recent Trades',
                                 ),
                               )
                             ],
                           ),
-                        ),
-                        Gap.h30,
-                        Container(
-                          height: 300,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
-                            border: Border.all(
-                              color: Theme.of(context).shadowColor,
-                              width: 1.5,
-                            ),
-                          ),
-                          child: const TradesSection(),
-                        ),
+                        )
                       ],
                     ),
                   ),
-                ),
+                  Gap.h30,
+                  Container(
+                    height: 300,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      border: Border.all(
+                        color: Theme.of(context).shadowColor,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: const TradesSection(),
+                  ),
+                ],
               ),
+            ),
+          ),
+        ),
         bottomSheet: const BottomSheetSection(),
       ),
     );
