@@ -48,21 +48,6 @@ You can easily build on this to create a full-fledged Crypto Trading App, as I'v
 [![Watch the video](https://img.youtube.com/vi/mIGb3IOmPUg/0.jpg)](https://www.youtube.com/watch?v=mIGb3IOmPUg)
 
 
-
-## Some Screenshots
-
-<!-- ![Screenshot 1](screenshots/image01.jpg)
-![Screenshot 2](screenshots/image02.jpg)
-![Screenshot 3](screenshots/image03.jpg)
-![Screenshot 4](screenshots/image04.jpg)
-![Screenshot 5](screenshots/image05.jpg)
-![Screenshot 6](screenshots/image06.jpg)
-![Screenshot 7](screenshots/image07.jpg)
-![Screenshot 8](screenshots/image08.jpg)
-![Screenshot 9](screenshots/image09.jpg)
- -->
-
-
 ## Need Help?
 
 With a decade of experience building solution-focused digital products (Software, Mobile Apps, Web Apps, Desktop Apps, etc.), my experience and skillset will be priceless for the success of your organisation's projects/products.
