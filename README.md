@@ -34,11 +34,18 @@ You can easily build on this to create a full-fledged Crypto Trading App, as I'v
 - The UI Figma design for this project is supplied by the RavenPay team (Don't forget to give them a shout-out if you use this repo for your next project)
 
 ## Project WalkThrough Video
-![Video Demo](https://youtu.be/gV5nkYbeujg)
+<!-- ![Video Demo](https://youtu.be/gV5nkYbeujg) -->
+[![Watch the video](https://img.youtube.com/vi/gV5nkYbeujg/0.jpg)](https://www.youtube.com/watch?v=gV5nkYbeujg)
 
 ## Video Demos
-![Light Theme Mode - Video Demo](https://youtu.be/XaMaQL6JcSY)
-![Dark Theme Mode - Video Demo](https://youtube.com/shorts/mIGb3IOmPUg?feature=share)
+
+### Light Theme Mode
+<!-- ![Light Theme Mode - Video Demo](https://youtu.be/XaMaQL6JcSY) -->
+[![Watch the video](https://img.youtube.com/vi/XaMaQL6JcSY/0.jpg)](https://www.youtube.com/watch?v=XaMaQL6JcSY)
+
+### Dark Theme Mode
+<!-- ![Dark Theme Mode - Video Demo](https://youtube.com/shorts/mIGb3IOmPUg?feature=share) -->
+[![Watch the video](https://img.youtube.com/vi/mIGb3IOmPUg/0.jpg)](https://www.youtube.com/watch?v=mIGb3IOmPUg)
 
 
 
