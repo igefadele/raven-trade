@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:raventrade/core/utils/app_logger.dart';
 import 'package:raventrade/data/models/models.dart';
-import 'package:raventrade/data/providers/binance/base_provider.dart';
+import 'package:raventrade/data/providers/base/base_provider.dart';
 import 'package:candlesticks/candlesticks.dart';
 import 'package:raventrade/ui/global/global_controller.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';

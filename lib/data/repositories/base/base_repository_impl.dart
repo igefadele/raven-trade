@@ -1,6 +1,6 @@
 import 'package:raventrade/data/models/response_models/symbol_response_model.dart';
 import 'package:candlesticks/candlesticks.dart';
-import 'package:raventrade/data/repositories/binance/base_repository.dart';
+import 'package:raventrade/data/repositories/base/base_repository.dart';
 import 'package:raventrade/ui/global/global_controller.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 

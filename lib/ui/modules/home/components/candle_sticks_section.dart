@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:raventrade/core/values/strings/app_assets.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
@@ -90,7 +91,7 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                             padding: const EdgeInsets.only(left: 2),
                             child: AppText.caption(
                               currentSymbol!.symbol,
-                              fontSize: 10,
+                              fontSize: 8,
                               color: AppColors.blackTint2,
                             ),
                           ),
@@ -100,18 +101,18 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                             width: 55,
                             onPressed: () {},
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 2),
+                              padding: const EdgeInsets.only(left: 1),
                               child: Row(
                                 children: [
                                   AppText.body2(
                                     'O ',
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.open.formatValue() ??
                                         "-",
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.green,
                                   ),
                                 ],
@@ -123,18 +124,18 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                             width: 55,
                             onPressed: () {},
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 2),
+                              padding: const EdgeInsets.only(left: 1),
                               child: Row(
                                 children: [
                                   AppText.body2(
                                     'H ',
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.high.formatValue() ??
                                         "-",
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.green,
                                   ),
                                 ],
@@ -146,18 +147,18 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                             width: 55,
                             onPressed: () {},
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 2),
+                              padding: const EdgeInsets.only(left: 1),
                               child: Row(
                                 children: [
                                   AppText.body2(
                                     'L ',
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.low.formatValue() ??
                                         "-",
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.green,
                                   ),
                                 ],
@@ -166,21 +167,22 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                           ),
                         if (candleTicker != null)
                           ToolBarAction(
-                            width: 55,
+                            width: 57,
                             onPressed: () {},
                             child: Padding(
                               padding: const EdgeInsets.only(left: 2),
                               child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   AppText.body2(
                                     'C ',
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.blackTint2,
                                   ),
                                   AppText.body2(
                                     candleTicker?.candle.close.formatValue() ??
                                         "-",
-                                    fontSize: 10,
+                                    fontSize: 8,
                                     color: AppColors.green,
                                   ),
                                 ],
