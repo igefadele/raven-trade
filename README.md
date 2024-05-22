@@ -1,5 +1,11 @@
 # RavenTrade
 
+## Author
+
+![Ige Fadele (Mr FIA)](https://linkedin.com/in/igefadele)
+
+##  Description
+
 Trade App For RavenPay Crypto Market Trading. 
 
 It's a functional app that you can use to monitor crypto pairs like BTCUSDT, etc. by following the candlestic charts and order books in realtime as retrieved from the Binance API.
