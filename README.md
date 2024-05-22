@@ -2,7 +2,7 @@
 
 ## Author
 
-![Ige Fadele (Mr FIA)](https://linkedin.com/in/igefadele)
+[Ige Fadele (Mr FIA)](https://linkedin.com/in/igefadele)
 
 ##  Description
 
