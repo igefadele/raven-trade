@@ -1,26 +1,26 @@
 import 'package:get/get.dart';
 import 'package:raventrade/data/di/di.dart';
-import 'package:raventrade/data/providers/binance/binance_provider.dart';
-import 'package:raventrade/data/providers/binance/binance_provider_impl.dart';
-import 'package:raventrade/data/repositories/binance/binance_repository.dart';
-import 'package:raventrade/data/repositories/binance/binance_repository_impl.dart';
-import 'package:raventrade/data/services/network_config/network_client.dart';
+import 'package:raventrade/data/providers/binance/base_provider.dart';
+import 'package:raventrade/data/providers/binance/base_provider_impl.dart';
+import 'package:raventrade/data/repositories/binance/base_repository.dart';
+import 'package:raventrade/data/repositories/binance/base_repository_impl.dart';
+import 'package:raventrade/data/services/network_config/network_service.dart';
 
 class GlobalBinding extends Bindings {
   @override
   void dependencies() {
-    DependencyProvider.registerSingleton<BinanceProvider>(
-      BinanceProviderImpl(),
+    DependencyProvider.registerSingleton<BaseProvider>(
+      BaseProviderImpl(),
       permanent: true,
     );
 
-    DependencyProvider.registerSingleton<BinanceRepository>(
-      BinanceRepositoryImpl(),
+    DependencyProvider.registerSingleton<BaseRepository>(
+      BaseRepositoryImpl(),
       permanent: true,
     );
 
-    DependencyProvider.registerSingleton<NetworkClient>(
-      NetworkClient(),
+    DependencyProvider.registerSingleton<NetworkService>(
+      NetworkService(),
       permanent: true,
     );
   }

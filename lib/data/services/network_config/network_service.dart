@@ -33,7 +33,7 @@ Dio _createDio() {
 
 enum FormDataType { post, patch }
 
-class NetworkClient {
+class NetworkService {
   //  const bool _enableLogging = true;
   final Map<String, dynamic> _headers = {
     // "Authorization": "Bearer ${_authService.accessToken}"

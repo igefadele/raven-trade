@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:raventrade/core/utils/app_logger.dart';
 import 'package:raventrade/data/models/models.dart';
-import 'package:raventrade/data/providers/binance/binance_provider.dart';
+import 'package:raventrade/data/providers/binance/base_provider.dart';
 import 'package:candlesticks/candlesticks.dart';
 import 'package:raventrade/ui/global/global_controller.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-class BinanceProviderImpl with GlobalController implements BinanceProvider {
-  final _logger = appLogger(BinanceProviderImpl);
+class BaseProviderImpl with GlobalController implements BaseProvider {
+  final _logger = appLogger(BaseProviderImpl);
 
   @override
   WebSocketChannel establishSocketConnection({
@@ -42,7 +42,7 @@ class BinanceProviderImpl with GlobalController implements BinanceProvider {
   }
 
   @override
-  Future<List<Candle>> getCandles({
+  Future<List<Candle>> fetchCandles({
     required String symbol,
     required String interval,
     int? endTime,
@@ -55,7 +55,7 @@ class BinanceProviderImpl with GlobalController implements BinanceProvider {
   }
 
   @override
-  Future<List<SymbolResponseModel>> getSymbols() async {
+  Future<List<SymbolResponseModel>> fetchSymbols() async {
     const uri = "https://api.binance.com/api/v3/ticker/price";
     final res = await networkClient.get(uri) as List;
     _logger.d("Symbols Response:: $res");

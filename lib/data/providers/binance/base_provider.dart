@@ -2,10 +2,10 @@ import 'package:raventrade/data/models/models.dart';
 import 'package:candlesticks/candlesticks.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-abstract class BinanceInterface {
-  Future<List<SymbolResponseModel>> getSymbols();
+abstract class BaseProvider {
+  Future<List<SymbolResponseModel>> fetchSymbols();
 
-  Future<List<Candle>> getCandles({
+  Future<List<Candle>> fetchCandles({
     required String symbol,
     required String interval,
     int? endTime,

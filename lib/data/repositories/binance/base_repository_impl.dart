@@ -1,10 +1,10 @@
 import 'package:raventrade/data/models/response_models/symbol_response_model.dart';
 import 'package:candlesticks/candlesticks.dart';
-import 'package:raventrade/data/repositories/binance/binance_repository.dart';
+import 'package:raventrade/data/repositories/binance/base_repository.dart';
 import 'package:raventrade/ui/global/global_controller.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-class BinanceRepositoryImpl with GlobalController implements BinanceRepository {
+class BaseRepositoryImpl with GlobalController implements BaseRepository {
   @override
   WebSocketChannel establishSocketConnection({
     required String symbol,
@@ -17,19 +17,19 @@ class BinanceRepositoryImpl with GlobalController implements BinanceRepository {
   }
 
   @override
-  Future<List<Candle>> getCandles({
+  Future<List<Candle>> fetchCandles({
     required String symbol,
     required String interval,
     int? endTime,
   }) async {
-    return binanceProvider.getCandles(
+    return binanceProvider.fetchCandles(
       symbol: symbol,
       interval: interval,
     );
   }
 
   @override
-  Future<List<SymbolResponseModel>> getSymbols() async {
-    return binanceProvider.getSymbols();
+  Future<List<SymbolResponseModel>> fetchSymbols() async {
+    return binanceProvider.fetchSymbols();
   }
 }

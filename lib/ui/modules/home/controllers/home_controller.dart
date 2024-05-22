@@ -50,8 +50,9 @@ class HomeController extends GetxController with GlobalController {
   // Get the symbols, then get the candles and if they are not available,
   //then initialize websocket and get needed data
   void init() {
-    getSymbols();
-    getCandles(currentSymbol.value, currentInterval.value).then((value) {
+    _logger.d("initializing ...");
+    fetchSymbols();
+    fetchCandles(currentSymbol.value, currentInterval.value).then((value) {
       if (candleTicker.value == null) {
         initializeWebSocket(
           interval: currentInterval.value,
@@ -62,16 +63,15 @@ class HomeController extends GetxController with GlobalController {
   }
 
   // GET SYMBOLS
-  Future<void> getSymbols() async {
+  Future<void> fetchSymbols() async {
     _logger.d("Getting Symbols.....");
     symbolLoading.value = true;
     try {
       moduleState.value = ModuleState.busy;
-      final result = await binanceRepository.getSymbols();
+      final result = await binanceRepository.fetchSymbols();
       symbols.value = result;
       _logger.d("Symbols Length ===> ${symbols.length}");
       if (symbols.isNotEmpty) {
-        debugPrint('\n\result symbol: ${result[11].toJson()} \n\n\n');
         currentSymbol.value = symbols[11];
       }
       moduleState.value = ModuleState.idle;
@@ -90,13 +90,13 @@ class HomeController extends GetxController with GlobalController {
   }
 
   // GET THE CANDLES
-  Future<List<Candle>> getCandles(
+  Future<List<Candle>> fetchCandles(
       SymbolResponseModel symbol, String interval) async {
     _logger.d("Getting Candles......");
     candleLoading.value = true;
     try {
       moduleState.value = ModuleState.busy;
-      final result = await binanceRepository.getCandles(
+      final result = await binanceRepository.fetchCandles(
         symbol: symbol.symbol,
         interval: interval.toLowerCase(),
       );
@@ -161,8 +161,9 @@ class HomeController extends GetxController with GlobalController {
 
   // TO LOAD MORE CANDLES
   Future<void> loadMoreCandles(StreamValueDTO streamValue) async {
+    _logger.d("Loading more candles..");
     try {
-      final data = await binanceRepository.getCandles(
+      final data = await binanceRepository.fetchCandles(
         symbol: streamValue.symbol.symbol,
         interval: streamValue.interval!,
         endTime: candles.last.date.millisecondsSinceEpoch,
@@ -179,11 +180,11 @@ class HomeController extends GetxController with GlobalController {
 
   // RE_INITIALIZE FROM HOMEPAGE
   Future<void> reInitialize(String value) async {
-    debugPrint('CALLED REFRESH');
+    _logger.d("Re-Initializing..");
     reInitializing.value = true;
     currentInterval.value = value;
     if (currentSymbol.value.symbol != '') {
-      getCandles(currentSymbol.value, currentInterval.value).then((value) {
+      fetchCandles(currentSymbol.value, currentInterval.value).then((value) {
         if (candleTicker.value == null) {
           initializeWebSocket(
             interval: currentInterval.value,
