@@ -4,6 +4,7 @@ import 'package:raventrade/core/values/colors/app_colors.dart';
 import 'package:raventrade/core/values/strings/constants.dart';
 import 'package:raventrade/core/values/styles/text_styles.dart';
 import 'package:raventrade/ui/global/extensions/context_extension.dart';
+import 'package:raventrade/ui/global/theme_controller.dart';
 import 'package:raventrade/ui/global/widgets/circular_progress_indicator.dart';
 import 'package:raventrade/ui/modules/home/components/components.dart';
 import 'package:raventrade/ui/modules/home/controllers/home_controller.dart';
@@ -30,6 +31,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   final controller = Get.put(HomeController());
+  final themeController = Get.put(ThemeController());
   late final TabController _tabController;
 
   @override
@@ -56,7 +58,8 @@ class _HomeViewState extends State<HomeView>
               top: 65,
               right: 10,
               child: Container(
-                height: context.isDarkMode ? 208 : 256,
+                //height: context.isDarkMode ? 208 : 256,
+                height: 305,
                 width: 214,
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
@@ -70,34 +73,32 @@ class _HomeViewState extends State<HomeView>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap.h10,
-                    context.isDarkMode
-                        ? const SizedBox.shrink()
-                        : Container(
-                            height: 45,
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.blackTint,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            child: TextField(
-                              style: bodyStyle1,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.only(left: 12, top: 8),
-                                hintText: "Search",
-                                hintStyle: bodyStyle1,
-                                suffixIcon: const Icon(
-                                  CupertinoIcons.search,
-                                  color: AppColors.blackTint,
-                                ),
-                              ),
-                            ),
+                    Container(
+                      height: 45,
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.blackTint,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      child: TextField(
+                        style: bodyStyle1,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.only(left: 12, top: 8),
+                          hintText: "Search",
+                          hintStyle: bodyStyle1,
+                          suffixIcon: const Icon(
+                            CupertinoIcons.search,
+                            color: AppColors.blackTint,
                           ),
+                        ),
+                      ),
+                    ),
                     ...drawerItems.map(
                       (e) => Padding(
                         padding: const EdgeInsets.symmetric(
@@ -106,6 +107,14 @@ class _HomeViewState extends State<HomeView>
                         ),
                         child: AppText.body1(e),
                       ),
+                    ),
+                    Switch(
+                      value:
+                          themeController.currentTheme.value == ThemeMode.dark,
+                      onChanged: (value) {
+                        themeController.switchTheme();
+                        Get.changeThemeMode(themeController.currentTheme.value);
+                      },
                     ),
                   ],
                 ),

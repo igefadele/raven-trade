@@ -15,12 +15,14 @@ You can easily build on this to create a full-fledged Crypto Trading App, as I'v
 - If you are running this project (this codebase) from a country where Binance is currently restricted, then you will have to use a VPN to access the Binance WebSocket API to get the needed data used within the app.
 
 
-## Tools, Packages
+## Tools, Packages, & Dependencies
 - GetX is used for state management, route management and dependency injection
 - nb_utils is used for some UI utilities and extensions.
 - ScreenUtils is adopted for dynamic sizing of UI elements.
 - Dio is used for network calls.
 - Binance Websocket API is the data source used in the app. 
+- Candlesticks package is used to display the candlestciks charts in the app.
+
 
 ## Credits
 - The UI Figma design for this project is supplied by the RavenPay team (Don't forget to give them a shout-out if you use this repo for your next project)
