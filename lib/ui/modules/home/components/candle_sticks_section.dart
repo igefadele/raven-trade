@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:raventrade/core/values/strings/app_assets.dart';
 import 'package:raventrade/core/values/colors/app_colors.dart';
@@ -30,7 +29,6 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
   final controller = Get.find<HomeController>();
   CandleTickerModel? get candleTicker => controller.candleTicker.value;
   SymbolResponseModel? get currentSymbol => controller.currentSymbol.value;
-  //String get currentInterval => controller.currentInterval.value;
   List<Candle> get candles => controller.candles;
 
   @override
@@ -60,7 +58,6 @@ class _CandleSticksSectionState extends State<CandleSticksSection> {
                     height: 400,
                     width: double.infinity,
                     child: Candlesticks(
-                      //key: Key(currentSymbol!.symbol + currentInterval),
                       key: candleStickKey,
                       candles: controller.candles,
                       onLoadMoreCandles: () {
